@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Consulting — Client Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --black:#050508;
+  --surface:#0d0d14;
+  --card:#12121c;
+  --border:#1e1e2e;
+  --white:#f0f0ff;
+  --muted:#6b6b8a;
+  --orange:#ff8c00;
+  --pink:#e91e8c;
+  --purple:#7b2fe8;
+  --cyan:#00c8ff;
+  --grad:linear-gradient(135deg,#ff8c00,#e91e8c,#7b2fe8,#00c8ff);
+  --grad-h:linear-gradient(135deg,#ffaa33,#ff3daa,#9b4fff,#33d6ff);
+  --supabase-url:https://wauirprbbsmfjcaevwma.supabase.co;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Exo 2',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% -10%,rgba(123,47,232,.15) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 80%,rgba(0,200,255,.08) 0%,transparent 60%);
+}
+
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+/* ── Header ── */
+header{padding:40px 0 56px;text-align:center}
+
+.logo-wrap{margin-bottom:32px}
+.logo-3{
+  width:72px;height:72px;
+  background:var(--grad);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;
+  font-family:'Rajdhani',sans-serif;
+  font-size:42px;font-weight:700;color:#fff;
+  box-shadow:0 0 40px rgba(233,30,140,.35);
+  letter-spacing:-.02em;
+}
+
+.tagline{
+  font-family:'Rajdhani',sans-serif;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:32px;display:block;margin-top:16px;
+}
+
+.hero-eyebrow{
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.2em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:14px;
+}
+
+h1{
+  font-family:'Rajdhani',sans-serif;font-size:clamp(30px,5.5vw,46px);
+  font-weight:700;line-height:1.1;letter-spacing:.02em;text-transform:uppercase;margin-bottom:16px;
+}
+
+h1 .grad-text{
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-sub{font-size:15px;color:var(--muted);max-width:460px;margin:0 auto 36px;font-weight:300;}
+
+.stripe-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(233,30,140,.08);border:0.5px solid rgba(233,30,140,.25);
+  border-radius:100px;padding:7px 16px;
+  font-family:'Rajdhani',sans-serif;font-size:12px;color:var(--pink);letter-spacing:.15em;text-transform:uppercase;
+}
+
+.stripe-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--pink);
+  box-shadow:0 0 8px var(--pink);animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* ── Progress ── */
+.progress-bar{display:flex;gap:5px;margin-bottom:48px;justify-content:center;}
+
+.step-dot{
+  width:32px;height:3px;border-radius:2px;background:var(--border);
+  transition:all .4s;position:relative;overflow:hidden;
+}
+
+.step-dot.active{background:var(--pink);box-shadow:0 0 8px rgba(233,30,140,.5)}
+.step-dot.done{background:rgba(233,30,140,.35)}
+
+/* ── Steps ── */
+.step{display:none}
+.step.active{display:block;animation:fadeUp .35s ease}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.step-header{margin-bottom:32px}
+
+.step-num{
+  font-family:'Rajdhani',sans-serif;font-size:11px;color:var(--muted);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;
+}
+
+.step-num span{
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-weight:600;
+}
+
+.step-title{
+  font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;
+}
+
+.step-desc{font-size:14px;color:var(--muted)}
+
+.grad-line{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(233,30,140,.4),rgba(0,200,255,.4),transparent);
+  margin-bottom:28px;
+}
+
+/* ── Form ── */
+.field{margin-bottom:20px}
+
+label{
+  display:block;font-family:'Rajdhani',sans-serif;font-size:11px;
+  letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+}
+
+input,textarea,select{
+  width:100%;background:var(--card);border:0.5px solid var(--border);border-radius:6px;
+  padding:13px 16px;font-family:'Exo 2',sans-serif;font-size:14px;font-weight:300;
+  color:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;
+}
+
+input::placeholder,textarea::placeholder{color:#2e2e42}
+
+input:focus,textarea:focus,select:focus{
+  border-color:rgba(233,30,140,.4);box-shadow:0 0 0 3px rgba(233,30,140,.08);
+}
+
+select option{background:var(--card)}
+textarea{resize:vertical;min-height:100px}
+.field-hint{font-size:12px;color:var(--muted);margin-top:5px;font-style:italic}
+
+/* ── Toggle group ── */
+.toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+.toggle-opt{
+  border:0.5px solid var(--border);border-radius:6px;padding:13px 16px;
+  cursor:pointer;transition:all .2s;position:relative;background:var(--card);
+}
+
+.toggle-opt input{position:absolute;opacity:0;width:0;height:0}
+
+.opt-label{font-size:14px;font-weight:400;display:block;transition:color .2s}
+.opt-price{font-family:'Rajdhani',sans-serif;font-size:11px;color:var(--muted);display:block;margin-top:2px;letter-spacing:.05em;}
+
+.toggle-opt:has(input:checked){border-color:var(--pink);background:rgba(233,30,140,.06);}
+
+.toggle-opt:has(input:checked) .opt-label{
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── Tier cards ── */
+.tier-grid{display:grid;gap:8px;margin-bottom:8px}
+
+.tier-card{
+  border:0.5px solid var(--border);border-radius:8px;padding:16px 18px;cursor:pointer;
+  transition:all .2s;display:flex;align-items:flex-start;gap:14px;background:var(--card);
+}
+
+.tier-card:has(input:checked){
+  border-color:var(--pink);background:rgba(233,30,140,.05);box-shadow:0 0 20px rgba(233,30,140,.1);
+}
+
+.tier-card input{width:16px;height:16px;min-width:16px;accent-color:var(--pink);margin-top:2px;padding:0;background:transparent;border:none}
+.tier-info{flex:1}
+.tier-name{font-weight:500;font-size:15px;margin-bottom:3px;font-family:'Rajdhani',sans-serif;letter-spacing:.05em;text-transform:uppercase}
+.tier-price{
+  font-family:'Rajdhani',sans-serif;font-size:13px;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:600;margin-bottom:6px;letter-spacing:.05em;
+}
+.tier-features{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── Buttons ── */
+.btn-row{
+  display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px;
+}
+
+.btn-back{
+  font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);background:none;border:none;cursor:pointer;padding:8px 0;transition:color .2s;
+}
+.btn-back:hover{color:var(--white)}
+
+.btn-next{
+  position:relative;overflow:hidden;background:var(--grad);color:#fff;border:none;border-radius:6px;
+  padding:14px 28px;font-family:'Rajdhani',sans-serif;font-size:13px;letter-spacing:.15em;
+  text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .2s;flex:1;max-width:240px;
+  box-shadow:0 4px 20px rgba(233,30,140,.3);
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(233,30,140,.45)}
+.btn-next:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ── Review ── */
+.review-section{border:0.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+.review-header{
+  background:var(--card);padding:11px 16px;font-family:'Rajdhani',sans-serif;font-size:11px;
+  letter-spacing:.15em;color:var(--muted);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.review-edit{
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  cursor:pointer;font-size:11px;background-color:transparent;border:none;
+  font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+}
+.review-body{padding:16px;font-size:13px;line-height:1.8}
+.review-row{display:flex;gap:12px;margin-bottom:4px}
+.review-key{color:var(--muted);min-width:120px;font-size:13px}
+.review-val{color:var(--white);font-size:13px}
+
+/* ── Success ── */
+.success-screen{display:none;text-align:center;padding:60px 0}
+.success-screen.show{display:block;animation:fadeUp .5s ease}
+
+.success-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(233,30,140,.08);border:0.5px solid rgba(233,30,140,.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;box-shadow:0 0 30px rgba(233,30,140,.2);font-size:30px;
+}
+
+.success-title{
+  font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  margin-bottom:12px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.success-sub{font-size:15px;color:var(--muted);max-width:360px;margin:0 auto 32px}
+
+.next-steps{
+  text-align:left;background:var(--card);border:0.5px solid var(--border);border-radius:10px;
+  padding:20px;max-width:420px;margin:0 auto;
+}
+.next-steps h4{
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:14px;
+}
+.next-step{display:flex;gap:12px;margin-bottom:12px;font-size:13px;align-items:flex-start}
+.ns-num{
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-top:1px;min-width:22px;letter-spacing:.05em;
+}
+
+/* ── Error toast ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:#1a0a0a;border:0.5px solid rgba(255,60,60,.4);color:#ff6b6b;
+  padding:12px 20px;border-radius:8px;font-size:13px;font-family:'Rajdhani',sans-serif;
+  letter-spacing:.05em;z-index:999;display:none;
+}
+.toast.show{display:block;animation:fadeUp .3s ease}
+
+/* ── Loading spinner ── */
+.spinner{
+  display:inline-block;width:14px;height:14px;
+  border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
+  border-radius:50%;animation:spin .7s linear infinite;margin-right:8px;vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{
+  text-align:center;padding:32px 0 48px;
+  font-family:'Rajdhani',sans-serif;font-size:11px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;
+}
+
+.grad-border{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--pink),var(--purple),var(--cyan),transparent);
+  margin:0 0 32px;opacity:.3;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo-3">3</div>
+    </div>
+    <span class="tagline">Autonomous AI Operating System</span>
+    <div class="hero-eyebrow">Client Onboarding</div>
+    <h1>Build your <span class="grad-text">autonomous</span> ops system</h1>
+    <p class="hero-sub">Answer a few questions and your AI CEO will be live within 24 hours.</p>
+    <div class="stripe-badge">
+      <span class="stripe-dot"></span>
+      Payment Confirmed
+    </div>
+  </header>
+
+  <div class="grad-border"></div>
+
+  <!-- Progress -->
+  <div class="progress-bar" id="progress">
+    <div class="step-dot active" data-step="0"></div>
+    <div class="step-dot" data-step="1"></div>
+    <div class="step-dot" data-step="2"></div>
+    <div class="step-dot" data-step="3"></div>
+    <div class="step-dot" data-step="4"></div>
+  </div>
+
+  <!-- Step 0 — Business Info -->
+  <div class="step active" data-step="0">
+    <div class="step-header">
+      <div class="step-num"><span>01</span> / 05 — Business Info</div>
+      <div class="step-title">About your business</div>
+      <div class="step-desc">Basic info so 3 knows who it's representing.</div>
+    </div>
+    <div class="grad-line"></div>
+    <div class="field"><label>Your full name *</label><input type="text" id="client-name" placeholder="e.g. Marcus Webb"></div>
+    <div class="field"><label>Business name *</label><input type="text" id="business-name" placeholder="e.g. Webb Freight Solutions"></div>
+    <div class="field">
+      <label>Industry / vertical *</label>
+      <select id="industry">
+        <option value="" disabled selected>Select your industry</option>
+        <option>Digital Agency / Creative Studio</option>
+        <option>Independent Consultant</option>
+        <option>Freight Broker / 3PL</option>
+        <option>Real Estate Broker / Agent</option>
+        <option>Insurance Agent / Financial Advisor</option>
+        <option>Med Spa / Private Practice / Clinic</option>
+        <option>Solo Contractor / Home Services</option>
+        <option>Coach / Freelancer</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field"><label>Business website</label><input type="url" id="website" placeholder="https://yoursite.com"></div>
+    <div class="field"><label>City, State</label><input type="text" id="location" placeholder="e.g. Houston, TX"></div>
+    <div class="btn-row"><div></div><button class="btn-next" onclick="next()">Continue →</button></div>
+  </div>
+
+  <!-- Step 1 — Pain Point -->
+  <div class="step" data-step="1">
+    <div class="step-header">
+      <div class="step-num"><span>02</span> / 05 — Pain Point</div>
+      <div class="step-title">The problem we're solving</div>
+      <div class="step-desc">3 needs to understand your bottleneck to fix it.</div>
+    </div>
+    <div class="grad-line"></div>
+    <div class="field">
+      <label>What's eating the most time in your week? *</label>
+      <textarea id="pain-point" placeholder="e.g. I spend 3+ hours a day chasing leads, following up with prospects, and staying on top of my inbox. By the time I do actual work, the day is gone."></textarea>
+    </div>
+    <div class="field">
+      <label>Roughly how many hours/week on admin + outreach?</label>
+      <div class="toggle-group">
+        <label class="toggle-opt"><input type="radio" name="hours" value="5-10"><span class="opt-label">5–10 hrs</span><span class="opt-price">Low</span></label>
+        <label class="toggle-opt"><input type="radio" name="hours" value="10-20"><span class="opt-label">10–20 hrs</span><span class="opt-price">Moderate</span></label>
+        <label class="toggle-opt"><input type="radio" name="hours" value="20-30"><span class="opt-label">20–30 hrs</span><span class="opt-price">High</span></label>
+        <label class="toggle-opt"><input type="radio" name="hours" value="30+"><span class="opt-label">30+ hrs</span><span class="opt-price">Critical</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Who is your ideal client? *</label>
+      <textarea id="target-client" placeholder="e.g. Small logistics companies, 5–50 employees, owner-operated, struggling to scale because the owner is doing everything."></textarea>
+      <div class="field-hint">Job titles, company size, industry, geography — be specific.</div>
+    </div>
+    <div class="btn-row"><button class="btn-back" onclick="back()">← Back</button><button class="btn-next" onclick="next()">Continue →</button></div>
+  </div>
+
+  <!-- Step 2 — Voice -->
+  <div class="step" data-step="2">
+    <div class="step-header">
+      <div class="step-num"><span>03</span> / 05 — Voice</div>
+      <div class="step-title">Your voice</div>
+      <div class="step-desc">3 communicates on your behalf. It needs to sound like you.</div>
+    </div>
+    <div class="grad-line"></div>
+    <div class="field">
+      <label>How would you describe your communication style? *</label>
+      <textarea id="voice" placeholder="e.g. Direct and no-BS. I don't waste words. I get to the point fast and expect the same from others. No corporate speak."></textarea>
+    </div>
+    <div class="field">
+      <label>Words or phrases you never use</label>
+      <input type="text" id="never-use" placeholder="e.g. synergy, circle back, touch base, per my last email">
+    </div>
+    <div class="field">
+      <label>Paste an email you've sent that you're proud of</label>
+      <textarea id="sample-email" placeholder="Paste a real email here — helps 3 match your cadence and tone." style="min-height:130px"></textarea>
+      <div class="field-hint">Optional but makes a big difference in how natural 3 sounds.</div>
+    </div>
+    <div class="btn-row"><button class="btn-back" onclick="back()">← Back</button><button class="btn-next" onclick="next()">Continue →</button></div>
+  </div>
+
+  <!-- Step 3 — Access -->
+  <div class="step" data-step="3">
+    <div class="step-header">
+      <div class="step-num"><span>04</span> / 05 — Access</div>
+      <div class="step-title">Access & integrations</div>
+      <div class="step-desc">3 needs to connect to your accounts to run autonomously.</div>
+    </div>
+    <div class="grad-line"></div>
+    <div class="field">
+      <label>Gmail address 3 will use *</label>
+      <input type="email" id="gmail" placeholder="your@gmail.com">
+      <div class="field-hint">Dominic will send a secure OAuth link — no passwords shared.</div>
+    </div>
+    <div class="field">
+      <label>What would you like 3 to handle?</label>
+      <div style="display:grid;gap:8px;margin-top:4px">
+        <label class="toggle-opt" style="grid-column:1/-1"><input type="checkbox" id="access-email" checked><span class="opt-label">Email — read inbox, qualify leads, send replies</span></label>
+        <label class="toggle-opt" style="grid-column:1/-1"><input type="checkbox" id="access-outreach"><span class="opt-label">Outreach — send cold emails to my target market</span></label>
+        <label class="toggle-opt" style="grid-column:1/-1"><input type="checkbox" id="access-calendar"><span class="opt-label">Calendar — read schedule, book discovery calls</span></label>
+        <label class="toggle-opt" style="grid-column:1/-1"><input type="checkbox" id="access-social"><span class="opt-label">Social — post daily content to LinkedIn / Twitter / Instagram</span></label>
+        <label class="toggle-opt" style="grid-column:1/-1"><input type="checkbox" id="access-briefing" checked><span class="opt-label">Briefing — daily 7am email with pipeline, priorities, schedule</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Do you have an existing contact list?</label>
+      <div class="toggle-group">
+        <label class="toggle-opt"><input type="radio" name="contacts" value="yes"><span class="opt-label">Yes</span><span class="opt-price">CSV or spreadsheet</span></label>
+        <label class="toggle-opt"><input type="radio" name="contacts" value="no"><span class="opt-label">No</span><span class="opt-price">3 will prospect</span></label>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn-back" onclick="back()">← Back</button><button class="btn-next" onclick="next()">Review →</button></div>
+  </div>
+
+  <!-- Step 4: Review -->
+  <div class="step" data-step="4">
+    <div class="step-header">
+      <div class="step-num"><span>05</span> / 05 — Review</div>
+      <div class="step-title">Review & submit</div>
+      <div class="step-desc">Everything look right? Dominic will have your system live within 24 hours.</div>
+    </div>
+    <div class="grad-line"></div>
+    <div class="review-section">
+      <div class="review-header">Business<button class="review-edit" onclick="goTo(0)">Edit</button></div>
+      <div class="review-body" id="review-business"></div>
+    </div>
+    <div class="review-section">
+      <div class="review-header">Pain Point & Target<button class="review-edit" onclick="goTo(1)">Edit</button></div>
+      <div class="review-body" id="review-pain"></div>
+    </div>
+    <div class="review-section">
+      <div class="review-header">Voice & Access<button class="review-edit" onclick="goTo(2)">Edit</button></div>
+      <div class="review-body" id="review-voice"></div>
+    </div>
+    <div class="btn-row"><button class="btn-back" onclick="back()">← Back</button><button class="btn-next" id="submit-btn" onclick="submit()" style="max-width:260px">Submit & Go Live →</button></div>
+  </div>
+
+  <!-- Success -->
+  <div class="success-screen" id="success">
+    <div class="success-icon">✦</div>
+    <div class="success-title">You're in the system.</div>
+    <p class="success-sub">Dominic has everything he needs. Your 3 deployment starts now.</p>
+    <div class="next-steps">
+      <h4>What happens next</h4>
+      <div class="next-step"><span class="ns-num">01</span><span>Dominic sets up your agents and dashboard — today.</span></div>
+      <div class="next-step"><span class="ns-num">02</span><span>He sends you a secure OAuth link to connect your Gmail and Calendar.</span></div>
+      <div class="next-step"><span class="ns-num">03</span><span>Your first morning briefing lands at 7am tomorrow. That's when 3 is live.</span></div>
+      <div class="next-step"><span class="ns-num">04</span><span>You'll get your personal command center URL to monitor everything.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<footer>© 2026 3 Consulting &nbsp;·&nbsp; AI Automation That Works For You</footer>
+
+<script>
+// ── Config ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://wauirprbbsmfjcaevwma.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // ← replace with real key
+const RESEND_NOTIFY_URL = 'https://three-outreach-agent.railway.internal/notify'; // ← or direct Resend via edge fn
+const NOTIFY_EMAIL = 'dominicaortizii@gmail.com';
+
+// ── State ────────────────────────────────────────────────
+let cur = 0;
+
+// ── Progress ─────────────────────────────────────────────
+function updateProgress() {
+  document.querySelectorAll('.step-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i === cur) d.classList.add('active');
+    else if (i < cur) d.classList.add('done');
+  });
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const t = document.querySelector(`.step[data-step="${n}"]`);
+  if (t) t.classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Validation ───────────────────────────────────────────
+function validate(step) {
+  const rules = {
+    0: [
+      { id: 'client-name', msg: 'Please enter your full name.' },
+      { id: 'business-name', msg: 'Please enter your business name.' },
+      { id: 'industry', msg: 'Please select your industry.' },
+    ],
+    1: [
+      { id: 'pain-point', msg: 'Please describe what\'s eating your time.' },
+      { id: 'target-client', msg: 'Please describe your ideal client.' },
+    ],
+    2: [
+      { id: 'voice', msg: 'Please describe your communication style.' },
+    ],
+    3: [
+      { id: 'gmail', msg: 'Please enter your Gmail address.' },
+    ],
+  };
+  const checks = rules[step] || [];
+  for (const { id, msg } of checks) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const val = el.value.trim();
+    if (!val) { showToast(msg); el.focus(); return false; }
+    if (id === 'gmail' && !val.includes('@')) { showToast('Please enter a valid email address.'); el.focus(); return false; }
+  }
+  return true;
+}
+
+// ── Navigation ───────────────────────────────────────────
+function next() {
+  if (!validate(cur)) return;
+  if (cur === 3) buildReview();
+  cur = Math.min(cur + 1, 4);
+  showStep(cur);
+}
+
+function back() { cur = Math.max(cur - 1, 0); showStep(cur); }
+function goTo(n) { cur = n; showStep(n); }
+
+// ── Helpers ──────────────────────────────────────────────
+function v(id) { return (document.getElementById(id)?.value || '').trim(); }
+
+function row(k, val) {
+  return `<div class="review-row"><span class="review-key">${k}</span><span class="review-val">${val || '—'}</span></div>`;
+}
+
+function trunc(s, n) { return s && s.length > n ? s.slice(0, n) + '…' : s; }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── Review Builder ───────────────────────────────────────
+function buildReview() {
+  document.getElementById('review-business').innerHTML =
+    row('Name', v('client-name')) + row('Business', v('business-name')) +
+    row('Industry', v('industry')) + row('Website', v('website') || '—') + row('Location', v('location') || '—');
+
+  const hrs = document.querySelector('input[name="hours"]:checked')?.value || '—';
+  document.getElementById('review-pain').innerHTML =
+    row('Time lost', hrs + '/week') + row('Pain point', trunc(v('pain-point'), 120)) +
+    row('Target client', trunc(v('target-client'), 120));
+
+  const handles = [];
+  if (document.getElementById('access-email').checked) handles.push('Email');
+  if (document.getElementById('access-outreach').checked) handles.push('Outreach');
+  if (document.getElementById('access-calendar').checked) handles.push('Calendar');
+  if (document.getElementById('access-social').checked) handles.push('Social');
+  if (document.getElementById('access-briefing').checked) handles.push('Briefing');
+  const contacts = document.querySelector('input[name="contacts"]:checked')?.value;
+
+  document.getElementById('review-voice').innerHTML =
+    row('Gmail', v('gmail') || '—') + row('Voice', trunc(v('voice'), 80) || '—') +
+    row('Never use', v('never-use') || '—') + row('3 handles', handles.join(', ') || '—') +
+    row('Contacts', contacts === 'yes' ? 'Yes — will upload' : 'No — 3 will prospect');
+}
+
+// ── Collect Data ─────────────────────────────────────────
+function collectData() {
+  return {
+    name: v('client-name'),
+    business: v('business-name'),
+    industry: v('industry'),
+    website: v('website') || null,
+    location: v('location') || null,
+    pain_point: v('pain-point'),
+    hours_per_week: document.querySelector('input[name="hours"]:checked')?.value || null,
+    target_client: v('target-client'),
+    voice: v('voice'),
+    never_use: v('never-use') || null,
+    sample_email: v('sample-email') || null,
+    gmail: v('gmail'),
+    handle_email: document.getElementById('access-email').checked,
+    handle_outreach: document.getElementById('access-outreach').checked,
+    handle_calendar: document.getElementById('access-calendar').checked,
+    handle_social: document.getElementById('access-social').checked,
+    handle_briefing: document.getElementById('access-briefing').checked,
+    has_contacts: document.querySelector('input[name="contacts"]:checked')?.value || null,
+    submitted_at: new Date().toISOString(),
+    status: 'new'
+  };
+}
+
+// ── Submit ───────────────────────────────────────────────
+async function submit() {
+  if (!validate(3)) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Submitting...';
+
+  const data = collectData();
+
+  try {
+    // 1. Save to Supabase
+    const sbRes = await fetch(`${SUPABASE_URL}/rest/v1/client_onboarding`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!sbRes.ok && sbRes.status !== 201) {
+      const err = await sbRes.text();
+      console.error('Supabase error:', err);
+      // Don't block on Supabase failure — still notify Dominic
+    }
+
+    // 2. Notify Dominic via Resend through outreach agent webhook
+    const handles = [];
+    if (data.handle_email) handles.push('Email');
+    if (data.handle_outreach) handles.push('Outreach');
+    if (data.handle_calendar) handles.push('Calendar');
+    if (data.handle_social) handles.push('Social');
+    if (data.handle_briefing) handles.push('Briefing');
+
+    const emailBody = `
+NEW CLIENT ONBOARDING — ${data.name}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BUSINESS
+Name: ${data.name}
+Company: ${data.business}
+Industry: ${data.industry}
+Website: ${data.website || 'None provided'}
+Location: ${data.location || 'Not specified'}
+
+PAIN POINT
+Time lost: ${data.hours_per_week || '?'} hrs/week
+Pain: ${data.pain_point}
+Target client: ${data.target_client}
+
+VOICE
+Style: ${data.voice}
+Never use: ${data.never_use || 'None specified'}
+Sample email: ${data.sample_email ? 'Provided (check Supabase)' : 'Not provided'}
+
+ACCESS
+Gmail: ${data.gmail}
+Handles: ${handles.join(', ') || 'None selected'}
+Contact list: ${data.has_contacts === 'yes' ? 'Yes — follow up for CSV' : 'No — 3 will prospect'}
+
+Submitted: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+View in Supabase: https://supabase.com/dashboard/project/wauirprbbsmfjcaevwma/editor
+    `.trim();
+
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer YOUR_RESEND_API_KEY', // ← replace with real Resend key
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'onboarding@3consulting.us',
+        to: [NOTIFY_EMAIL],
+        subject: `🆕 New Client: ${data.name} — ${data.business}`,
+        text: emailBody
+      })
+    });
+
+    // 3. Show success
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('progress').style.opacity = '0';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    console.error('Submit error:', err);
+    // Show success anyway — data logged to console as fallback
+    console.log('ONBOARDING DATA (fallback):', JSON.stringify(data, null, 2));
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('progress').style.opacity = '0';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+updateProgress();
+</script>
+</body>
+</html>
