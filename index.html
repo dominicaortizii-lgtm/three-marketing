@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 — Your AI Operating System</title>
+<meta name="description" content="3 is an autonomous AI operating system that handles your outreach, inbox, calendar, content, and business intelligence — so you can focus on the work that matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --black:#050508;
+  --surface:#0d0d14;
+  --card:#12121c;
+  --card2:#16161f;
+  --border:#1e1e2e;
+  --white:#f0f0ff;
+  --muted:#6b6b8a;
+  --muted2:#9090b0;
+  --orange:#ff8c00;
+  --pink:#e91e8c;
+  --purple:#7b2fe8;
+  --cyan:#00c8ff;
+  --green:#00e5a0;
+  --grad:linear-gradient(135deg,#ff8c00,#e91e8c,#7b2fe8,#00c8ff);
+  --grad-h:linear-gradient(135deg,#ffaa33,#ff3daa,#9b4fff,#33d6ff);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Exo 2',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 48px;
+  background:rgba(5,5,8,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.nav-logo{
+  font-family:'Rajdhani',sans-serif;
+  font-size:28px;font-weight:700;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{
+  font-family:'Rajdhani',sans-serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted2);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 22px;border-radius:6px;
+  background:var(--grad);color:#fff;text-decoration:none;
+  transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.85}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;
+  position:relative;overflow:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -5%,rgba(123,47,232,.18) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 40% at 90% 90%,rgba(0,200,255,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 10% 80%,rgba(233,30,140,.06) 0%,transparent 60%);
+}
+
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+}
+
+.hero-inner{max-width:860px;margin:0 auto;position:relative}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:100px;
+  border:1px solid rgba(233,30,140,.3);
+  background:rgba(233,30,140,.08);
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:32px;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+h1{
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(42px,7vw,88px);
+  font-weight:700;line-height:1.0;letter-spacing:.01em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.grad-text{
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-sub{
+  font-size:clamp(16px,2.2vw,20px);font-weight:300;color:var(--muted2);
+  max-width:580px;margin:0 auto 48px;line-height:1.65;
+}
+
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+
+.btn-primary{
+  font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 36px;border-radius:8px;
+  background:var(--grad);color:#fff;text-decoration:none;
+  box-shadow:0 0 40px rgba(233,30,140,.25);
+  transition:all .2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 50px rgba(233,30,140,.35)}
+
+.btn-secondary{
+  font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 36px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;color:var(--white);text-decoration:none;
+  transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--muted);transform:translateY(-2px)}
+
+.hero-stats{
+  display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
+  padding-top:48px;border-top:1px solid var(--border);
+}
+.stat{text-align:center}
+.stat-num{
+  font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;
+}
+.stat-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+/* ── SECTION BASE ── */
+section{padding:100px 24px}
+.container{max-width:1100px;margin:0 auto}
+.section-label{
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:16px;display:block;
+}
+.section-title{
+  font-family:'Rajdhani',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;
+  line-height:1.1;text-transform:uppercase;margin-bottom:20px;
+}
+.section-sub{font-size:17px;color:var(--muted2);max-width:560px;line-height:1.65}
+
+/* ── TICKER ── */
+.ticker{
+  padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  overflow:hidden;background:rgba(13,13,20,.6);
+}
+.ticker-track{
+  display:flex;gap:64px;width:max-content;
+  animation:scroll 30s linear infinite;
+}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{
+  font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:16px;
+}
+.ticker-item::after{content:'•';color:var(--pink)}
+
+/* ── WHO IT'S FOR ── */
+.personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:64px}
+.persona{
+  padding:40px 32px;background:var(--card);
+  position:relative;overflow:hidden;cursor:default;
+  transition:background .2s;
+}
+.persona:hover{background:var(--card2)}
+.persona::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--grad);opacity:0;transition:opacity .3s;
+}
+.persona:hover::before{opacity:1}
+.persona-icon{font-size:32px;margin-bottom:20px;display:block}
+.persona-role{
+  font-family:'Rajdhani',sans-serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:10px;
+}
+.persona-name{
+  font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.persona-desc{font-size:14px;color:var(--muted2);line-height:1.6}
+.persona-use{
+  margin-top:20px;padding-top:20px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.persona-use span{color:var(--cyan)}
+
+/* ── WHAT 3 DOES ── */
+.capabilities{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:64px}
+.cap{
+  padding:32px;background:var(--card);border-radius:12px;
+  border:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.cap-accent{
+  position:absolute;top:0;right:0;width:80px;height:80px;
+  border-radius:0 0 0 80px;
+  opacity:.08;
+}
+.cap-icon{font-size:24px;margin-bottom:16px}
+.cap-title{
+  font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.cap-desc{font-size:14px;color:var(--muted2);line-height:1.6}
+.cap-tag{
+  display:inline-block;margin-top:16px;
+  padding:3px 10px;border-radius:4px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+}
+
+/* ── PRICING ── */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:64px;align-items:start}
+.plan{
+  padding:40px 36px;background:var(--card);border-radius:16px;
+  border:1px solid var(--border);position:relative;overflow:hidden;
+}
+.plan.featured{
+  border-color:rgba(233,30,140,.4);
+  background:linear-gradient(135deg,rgba(123,47,232,.08),rgba(233,30,140,.05));
+}
+.plan-badge{
+  position:absolute;top:20px;right:20px;
+  padding:4px 12px;border-radius:100px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  background:var(--grad);color:#fff;
+}
+.plan-tier{
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;
+}
+.plan-name{
+  font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.plan-price{
+  font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;
+  line-height:1;margin-bottom:4px;
+}
+.plan-price sup{font-size:24px;vertical-align:super}
+.plan-price span{font-size:16px;color:var(--muted);font-weight:400}
+.plan-tagline{font-size:14px;color:var(--muted2);margin-bottom:32px;margin-top:8px}
+.plan-divider{height:1px;background:var(--border);margin-bottom:28px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.plan-features li{
+  display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted2);
+}
+.plan-features li::before{
+  content:'→';color:var(--pink);font-family:'Rajdhani',sans-serif;font-weight:700;flex-shrink:0;
+}
+.plan-cta{
+  display:block;text-align:center;
+  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px;border-radius:8px;text-decoration:none;
+  transition:all .2s;
+}
+.plan-cta-grad{background:var(--grad);color:#fff;box-shadow:0 0 30px rgba(233,30,140,.2)}
+.plan-cta-grad:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(233,30,140,.3)}
+.plan-cta-outline{border:1px solid var(--border);color:var(--white)}
+.plan-cta-outline:hover{border-color:var(--muted);transform:translateY(-2px)}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:64px;position:relative}
+.steps::before{
+  content:'';position:absolute;top:32px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(233,30,140,.3),rgba(0,200,255,.3),transparent);
+}
+.step{text-align:center;position:relative}
+.step-num{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;
+  background:var(--grad);color:#fff;
+  margin:0 auto 24px;position:relative;z-index:1;
+}
+.step-title{
+  font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.step-desc{font-size:13px;color:var(--muted2);line-height:1.6}
+
+/* ── AGENTS ── */
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:64px}
+.agent-card{
+  padding:24px;background:var(--card);border-radius:10px;
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:8px;
+}
+.agent-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+.agent-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase}
+.agent-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.agent-freq{font-size:11px;color:var(--cyan);font-family:'Rajdhani',sans-serif;letter-spacing:.1em}
+
+/* ── CTA SECTION ── */
+.cta-section{
+  text-align:center;padding:120px 24px;
+  background:linear-gradient(180deg,transparent,rgba(123,47,232,.08),transparent);
+  border-top:1px solid var(--border);
+}
+.cta-section h2{
+  font-family:'Rajdhani',sans-serif;font-size:clamp(36px,5vw,64px);
+  font-weight:700;text-transform:uppercase;margin-bottom:20px;
+}
+.cta-section p{font-size:18px;color:var(--muted2);margin-bottom:48px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* ── FOOTER ── */
+footer{
+  padding:48px 24px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
+  max-width:1100px;margin:0 auto;
+}
+.footer-logo{
+  font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:var(--muted);width:100%}
+
+/* ── GRAD LINE ── */
+.grad-line{height:1px;background:linear-gradient(90deg,transparent,rgba(233,30,140,.4),rgba(0,200,255,.4),transparent);margin:0}
+
+/* ── ANIMATIONS ── */
+.fade-up{opacity:0;transform:translateY(32px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{display:none}
+  .hero-stats{gap:32px}
+  .steps::before{display:none}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">3</div>
+  <div class="nav-links">
+    <a href="#who">Who It's For</a>
+    <a href="#what">What It Does</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#agents">Agents</a>
+  </div>
+  <a href="#pricing" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Live &amp; Autonomous · 8 Agents Running
+    </div>
+    <h1>Your Business.<br><span class="grad-text">On Autopilot.</span></h1>
+    <p class="hero-sub">3 is an autonomous AI operating system that handles your outreach, inbox, calendar, content, and business intelligence — so you can focus on the work that matters.</p>
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn-primary">Start with 3</a>
+      <a href="#what" class="btn-secondary">See What It Does</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">8</span><span class="stat-label">Autonomous Agents</span></div>
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Always Running</span></div>
+      <div class="stat"><span class="stat-num">1,600+</span><span class="stat-label">Emails Sent</span></div>
+      <div class="stat"><span class="stat-num">$0</span><span class="stat-label">Headcount Added</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-line"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Autonomous Outreach</span>
+    <span class="ticker-item">AI Inbox Management</span>
+    <span class="ticker-item">Smart Scheduling</span>
+    <span class="ticker-item">Social Content Engine</span>
+    <span class="ticker-item">Daily Intelligence Brief</span>
+    <span class="ticker-item">Lead Prospecting</span>
+    <span class="ticker-item">Pipeline Automation</span>
+    <span class="ticker-item">Opportunity Scanning</span>
+    <span class="ticker-item">Autonomous Outreach</span>
+    <span class="ticker-item">AI Inbox Management</span>
+    <span class="ticker-item">Smart Scheduling</span>
+    <span class="ticker-item">Social Content Engine</span>
+    <span class="ticker-item">Daily Intelligence Brief</span>
+    <span class="ticker-item">Lead Prospecting</span>
+    <span class="ticker-item">Pipeline Automation</span>
+    <span class="ticker-item">Opportunity Scanning</span>
+  </div>
+</div>
+
+<!-- WHO IT'S FOR -->
+<section id="who">
+  <div class="container">
+    <span class="section-label fade-up">Who It's For</span>
+    <h2 class="section-title fade-up">Built for Anyone<br>Running a Business Alone</h2>
+    <p class="section-sub fade-up">Whether you're a creative, a consultant, or a CEO — 3 works in the background so you don't have to.</p>
+    <div class="personas">
+      <div class="persona fade-up">
+        <span class="persona-icon">📸</span>
+        <div class="persona-role">Creative</div>
+        <div class="persona-name">The Photographer</div>
+        <p class="persona-desc">You take world-class photos. But posting consistently, responding to inquiries, and building an online presence takes time you don't have.</p>
+        <div class="persona-use">3 handles your <span>social media, website updates, inquiry responses</span> — automatically.</div>
+      </div>
+      <div class="persona fade-up">
+        <span class="persona-icon">☕</span>
+        <div class="persona-role">Local Business</div>
+        <div class="persona-name">The Coffee Shop</div>
+        <p class="persona-desc">You're running a shop, not a marketing agency. But your competitors are everywhere online and you're barely keeping up.</p>
+        <div class="persona-use">3 manages your <span>content calendar, promotions, and customer engagement</span> daily.</div>
+      </div>
+      <div class="persona fade-up">
+        <span class="persona-icon">⚡</span>
+        <div class="persona-role">Solo Operator</div>
+        <div class="persona-name">The Consultant</div>
+        <p class="persona-desc">You're doing the work of a full team. Outreach, follow-up, proposals, and client management — all on your own.</p>
+        <div class="persona-use">3 runs your <span>full BD pipeline, inbox, and calendar</span> while you focus on delivery.</div>
+      </div>
+      <div class="persona fade-up">
+        <span class="persona-icon">🏢</span>
+        <div class="persona-role">Executive</div>
+        <div class="persona-name">The CEO</div>
+        <p class="persona-desc">You need leverage. A chief of staff who never sleeps, never misses a follow-up, and briefs you every morning.</p>
+        <div class="persona-use">3 acts as your <span>personal executive assistant and ops layer</span>, fully autonomous.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section id="what" style="background:var(--surface)">
+  <div class="container">
+    <span class="section-label fade-up">Capabilities</span>
+    <h2 class="section-title fade-up">One System.<br>Everything Handled.</h2>
+    <p class="section-sub fade-up">3 isn't a chatbot. It's a network of specialized agents that run 24/7 — each one doing a specific job, all working together.</p>
+    <div class="capabilities">
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--pink)"></div>
+        <div class="cap-icon">📤</div>
+        <div class="cap-title">Autonomous Outreach</div>
+        <p class="cap-desc">Researches prospects, writes personalized emails, sends them on schedule, follows up automatically. You just check the replies.</p>
+        <span class="cap-tag" style="background:rgba(233,30,140,.1);color:var(--pink)">Sales</span>
+      </div>
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--cyan)"></div>
+        <div class="cap-icon">📧</div>
+        <div class="cap-title">Smart Inbox</div>
+        <p class="cap-desc">Reads every email, classifies it, drafts replies, identifies hot leads, and flags what actually needs your attention.</p>
+        <span class="cap-tag" style="background:rgba(0,200,255,.1);color:var(--cyan)">Operations</span>
+      </div>
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--purple)"></div>
+        <div class="cap-icon">📅</div>
+        <div class="cap-title">Calendar Management</div>
+        <p class="cap-desc">Books meetings, sends reminders, follows up after calls, and moves deals through your pipeline automatically.</p>
+        <span class="cap-tag" style="background:rgba(123,47,232,.1);color:var(--purple)">Scheduling</span>
+      </div>
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--orange)"></div>
+        <div class="cap-icon">📱</div>
+        <div class="cap-title">Social Content Engine</div>
+        <p class="cap-desc">Writes and posts content to your channels twice daily, Monday through Friday. Consistent presence without the effort.</p>
+        <span class="cap-tag" style="background:rgba(255,140,0,.1);color:var(--orange)">Marketing</span>
+      </div>
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--green)"></div>
+        <div class="cap-icon">🔭</div>
+        <div class="cap-title">Opportunity Scanner</div>
+        <p class="cap-desc">Scans market signals every 6 hours, identifies monetizable opportunities, and recommends specific actions.</p>
+        <span class="cap-tag" style="background:rgba(0,229,160,.1);color:var(--green)">Intelligence</span>
+      </div>
+      <div class="cap fade-up">
+        <div class="cap-accent" style="background:var(--pink)"></div>
+        <div class="cap-icon">📊</div>
+        <div class="cap-title">Daily Intelligence Brief</div>
+        <p class="cap-desc">Every morning at 7am, 3 sends you a briefing: pipeline status, new leads, key opportunities, and what to prioritize.</p>
+        <span class="cap-tag" style="background:rgba(233,30,140,.1);color:var(--pink)">Intelligence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <span class="section-label fade-up">How It Works</span>
+    <h2 class="section-title fade-up">Up in 48 Hours.<br>Running Forever.</h2>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">1</div>
+        <div class="step-title">We Onboard You</div>
+        <p class="step-desc">Tell us about your business, your offer, and who you're targeting. 3 gets configured for your exact context.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">2</div>
+        <div class="step-title">Agents Go Live</div>
+        <p class="step-desc">Your 8 autonomous agents spin up and start working — outreach, inbox, social, prospecting — all running simultaneously.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">3</div>
+        <div class="step-title">You Get Briefed</div>
+        <p class="step-desc">Every morning, 3 tells you what happened overnight, what needs your attention, and what moves to make today.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">4</div>
+        <div class="step-title">You Close Deals</div>
+        <p class="step-desc">Warm replies, booked meetings, and real pipeline — handed to you. You focus on the conversation, 3 handles everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--surface)">
+  <div class="container">
+    <span class="section-label fade-up">Pricing</span>
+    <h2 class="section-title fade-up">Simple Pricing.<br>Serious Leverage.</h2>
+    <p class="section-sub fade-up">No per-seat fees. No usage caps. One flat rate for a full AI operating system working for you around the clock.</p>
+    <div class="pricing">
+
+      <!-- Starter -->
+      <div class="plan fade-up">
+        <div class="plan-tier">Starter</div>
+        <div class="plan-name">Creator</div>
+        <div class="plan-price"><sup>$</sup>297<span>/mo</span></div>
+        <p class="plan-tagline">For creatives and local businesses who need an online presence without the work.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Social content posted daily (Mon–Fri)</li>
+          <li>Inquiry response automation</li>
+          <li>Weekly performance brief</li>
+          <li>Website content updates</li>
+          <li>3 AI chat interface</li>
+        </ul>
+        <a href="/onboarding.html" class="plan-cta plan-cta-outline">Get Started</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan featured fade-up">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-tier">Pro</div>
+        <div class="plan-name">Operator</div>
+        <div class="plan-price" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"><sup>$</sup>997<span style="-webkit-text-fill-color:var(--muted)">/mo</span></div>
+        <p class="plan-tagline">For consultants, fractional execs, and agencies running business development solo.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Creator</li>
+          <li>Autonomous outreach (25/day)</li>
+          <li>AI inbox management + replies</li>
+          <li>Calendar booking automation</li>
+          <li>Daily 7am intelligence brief</li>
+          <li>Pipeline tracking + CRM</li>
+          <li>Opportunity scanner (every 6h)</li>
+        </ul>
+        <a href="/onboarding.html" class="plan-cta plan-cta-grad">Get Started</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="plan fade-up">
+        <div class="plan-tier">Enterprise</div>
+        <div class="plan-name">Executive</div>
+        <div class="plan-price"><sup>$</sup>3,500<span>/mo</span></div>
+        <p class="plan-tagline">For CEOs and growing teams who need a full AI chief of operations layer.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Operator</li>
+          <li>Custom agent configuration</li>
+          <li>Multi-channel outreach sequences</li>
+          <li>Team-wide deployment</li>
+          <li>Custom integrations + workflows</li>
+          <li>Dedicated setup + onboarding</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="mailto:dominic@3consulting.us" class="plan-cta plan-cta-outline">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="agents">
+  <div class="container">
+    <span class="section-label fade-up">The Network</span>
+    <h2 class="section-title fade-up">8 Agents.<br>Always Working.</h2>
+    <p class="section-sub fade-up">Each agent has one job. Together they run your entire business development and marketing operation.</p>
+    <div class="agents-grid">
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Email Agent</div>
+        <p class="agent-desc">Reads, classifies, and responds to your Gmail every 2 minutes.</p>
+        <div class="agent-freq">Every 2 min</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Outreach Agent</div>
+        <p class="agent-desc">Sends personalized cold emails to 25 new prospects per hour during business hours.</p>
+        <div class="agent-freq">Hourly, 9am–5pm</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Calendar Agent</div>
+        <p class="agent-desc">Books meetings, sends reminders, and advances your pipeline autonomously.</p>
+        <div class="agent-freq">Every 30 min</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Social Agent</div>
+        <p class="agent-desc">Writes and posts content to your social channels twice daily, Mon–Fri.</p>
+        <div class="agent-freq">9am + 6pm daily</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Briefing Agent</div>
+        <p class="agent-desc">Delivers a daily intelligence report every morning at 7am.</p>
+        <div class="agent-freq">7am daily</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Opp Scanner</div>
+        <p class="agent-desc">Scans market signals and surfaces monetizable opportunities.</p>
+        <div class="agent-freq">Every 6 hours</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Drive Agent</div>
+        <p class="agent-desc">Syncs and reads your Google Drive documents for context.</p>
+        <div class="agent-freq">Every 60 min</div>
+      </div>
+      <div class="agent-card fade-up">
+        <div class="agent-dot"></div>
+        <div class="agent-name">Prospecting Agent</div>
+        <p class="agent-desc">Finds and qualifies new leads automatically on a set schedule.</p>
+        <div class="agent-freq">On schedule</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to Run<br><span class="grad-text">On Autopilot?</span></h2>
+  <p>Get your AI operating system live in 48 hours. No hiring. No overhead. Just results.</p>
+  <div class="hero-ctas">
+    <a href="/onboarding.html" class="btn-primary">Start with 3</a>
+    <a href="mailto:dominic@3consulting.us" class="btn-secondary">Talk to Dominic</a>
+  </div>
+</div>
+
+<div class="grad-line"></div>
+
+<footer>
+  <div class="footer-logo">3</div>
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="mailto:dominic@3consulting.us">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 3 Consulting. All rights reserved. · 3consulting.us</div>
+</footer>
+
+<script>
+// Scroll-triggered animations
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 80 + 'ms';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
