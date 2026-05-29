@@ -490,7 +490,7 @@ footer{
 <script>
 // ── Config ──────────────────────────────────────────────
 const SUPABASE_URL = 'https://wauirprbbsmfjcaevwma.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // ← replace with real key
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhdWlycHJiYnNtZmpjYWV2d21hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4OTUyNDMsImV4cCI6MjA5MjQ3MTI0M30.7pZXY-Tir-YNJAQteM8tu42uZyT8txgeL8HbVfU1zx0'; // ← replace with real key
 const RESEND_NOTIFY_URL = 'https://three-outreach-agent.railway.internal/notify'; // ← or direct Resend via edge fn
 const NOTIFY_EMAIL = 'dominicaortizii@gmail.com';
 
@@ -693,11 +693,11 @@ View in Supabase: https://supabase.com/dashboard/project/wauirprbbsmfjcaevwma/ed
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer YOUR_RESEND_API_KEY', // ← replace with real Resend key
+        'Authorization': 'Bearer re_5s6VjNnz_JSt2DFMALpmgdafEPPpxDZpn', // ← replace with real Resend key
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'onboarding@3consulting.us',
+        from: 'dominic@3consulting.us',
         to: [NOTIFY_EMAIL],
         subject: `🆕 New Client: ${data.name} — ${data.business}`,
         text: emailBody
