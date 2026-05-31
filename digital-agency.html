@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 for Digital Agency — AI Operating System</title>
+<meta name="description" content="3 handles your outreach, client comms, and new business pipeline so your team ships great work instead of chasing people.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#050508;--surface:#0d0d14;--card:#12121c;--card2:#16161f;
+  --border:#1e1e2e;--white:#f0f0ff;--muted:#6b6b8a;--muted2:#9090b0;
+  --orange:#ff8c00;--pink:#e91e8c;--purple:#7b2fe8;--cyan:#00c8ff;--green:#00e5a0;
+  --grad:linear-gradient(135deg,#ff8c00,#e91e8c,#7b2fe8,#00c8ff);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Exo 2',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(5,5,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.04)}
+.nav-logo{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:9px 22px;border-radius:6px;background:var(--grad);color:#fff;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;background-image:radial-gradient(ellipse 80% 60% at 50% -5%,rgba(123,47,232,.18) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(0,200,255,.08) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
+.hero-inner{max-width:860px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;border:1px solid rgba(233,30,140,.3);background:rgba(233,30,140,.08);font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:32px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:'Rajdhani',sans-serif;font-size:clamp(38px,6.5vw,82px);font-weight:700;line-height:1.0;letter-spacing:.01em;text-transform:uppercase;margin-bottom:24px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,2vw,19px);font-weight:300;color:var(--muted2);max-width:580px;margin:0 auto 48px;line-height:1.65}
+.hero-role{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+.btn-primary{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:14px 36px;border-radius:8px;background:var(--grad);color:#fff;text-decoration:none;box-shadow:0 0 40px rgba(233,30,140,.25);transition:all .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 50px rgba(233,30,140,.35)}
+.btn-secondary{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:14px 36px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--white);text-decoration:none;transition:all .2s}
+.btn-secondary:hover{border-color:var(--muted);transform:translateY(-2px)}
+
+/* PAIN */
+section{padding:100px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--pink);margin-bottom:16px}
+.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:16px}
+.section-sub{font-size:16px;color:var(--muted2);max-width:560px;margin-bottom:64px}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px}
+.pain-card{background:var(--card);padding:36px;position:relative;overflow:hidden}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .3s}
+.pain-card:hover::before{opacity:1}
+.pain-num{font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:16px;opacity:.4}
+.pain-text{font-size:16px;color:var(--muted2);line-height:1.6}
+
+/* HOW */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.how-card{background:var(--card);border:0.5px solid var(--border);border-radius:8px;padding:28px;transition:border-color .2s}
+.how-card:hover{border-color:rgba(233,30,140,.3)}
+.how-icon{font-size:28px;margin-bottom:16px;display:block}
+.how-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.how-desc{font-size:13px;color:var(--muted2);line-height:1.6}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:960px;margin:0 auto}
+.plan{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:36px;position:relative;transition:border-color .2s}
+.plan:hover{border-color:rgba(233,30,140,.3)}
+.plan.featured{border-color:rgba(233,30,140,.4);background:linear-gradient(135deg,rgba(233,30,140,.05),rgba(123,47,232,.05))}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:4px 16px;border-radius:100px}
+.plan-name{font-family:'Rajdhani',sans-serif;font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.plan-price{font-family:"Rajdhani",sans-serif;font-size:48px;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px}
+.plan-period{font-size:13px;color:var(--muted);margin-bottom:24px}
+.plan-features{list-style:none;margin-bottom:32px}
+.plan-features li{font-size:14px;color:var(--muted2);padding:8px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:'✦';font-size:10px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0}
+.plan-cta{display:block;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:13px;border-radius:6px;background:var(--grad);color:#fff;text-decoration:none;transition:opacity .2s}
+.plan-cta:hover{opacity:.85}
+.plan-cta.outline{background:transparent;border:0.5px solid var(--border);color:var(--white)}
+.plan-cta.outline:hover{border-color:var(--muted)}
+
+/* CTA STRIP */
+.cta-strip{background:linear-gradient(135deg,rgba(255,140,0,.08),rgba(233,30,140,.08),rgba(123,47,232,.08));border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:80px 24px;text-align:center}
+.cta-strip h2{font-family:'Rajdhani',sans-serif;font-size:clamp(28px,4vw,52px);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:16px}
+.cta-strip p{font-size:16px;color:var(--muted2);max-width:480px;margin:0 auto 36px}
+
+/* FOOTER */
+footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:0.5px solid var(--border)}
+.footer-logo{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;font-family:'Rajdhani',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:var(--muted);width:100%}
+
+@media(max-width:768px){nav{padding:16px 20px}.nav-links{display:none}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">3</a>
+  <div class="nav-links">
+    <a href="/real-estate.html">Real Estate</a>
+    <a href="/digital-agency.html">Agency</a>
+    <a href="/consultant.html">Consultant</a>
+    <a href="/contractor.html">Contractor</a>
+    <a href="/event-planner.html">Events</a>
+    <a href="/staffing.html">Staffing</a>
+  </div>
+  <a href="/onboarding.html" class="nav-cta">Get Started</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-role">Built for Agency Owner & Creative Director</div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Live & Autonomous · 8 Agents Running</div>
+    <h1>Run your agency.<br><span class="grad-text">Run on autopilot.</span></h1>
+    <p class="hero-sub">3 handles your outreach, client comms, and new business pipeline so your team ships great work instead of chasing people.</p>
+    <div class="hero-ctas">
+      <a href="/onboarding.html" class="btn-primary">Start with 3</a>
+      <a href="/#pricing" class="btn-secondary">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface)">
+  <div class="section-inner">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">You're running the business<br>and doing every job in it.</h2>
+    <p class="section-sub">Sound familiar? These are the three things killing your growth right now.</p>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-num">01</div><div class="pain-text">Chasing client approvals and unpaid invoices weekly</div></div>
+      <div class="pain-card"><div class="pain-num">02</div><div class="pain-text">Losing new business because follow-up falls through the cracks</div></div>
+      <div class="pain-card"><div class="pain-num">03</div><div class="pain-text">Burning hours on admin instead of creative work that pays</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">The Solution</div>
+    <h2 class="section-title">3 handles it.<br><span class="grad-text">All of it.</span></h2>
+    <p class="section-sub">8 autonomous agents working around the clock so you don't have to.</p>
+    <div class="how-grid">
+      <div class="how-card"><span class="how-icon">📬</span><div class="how-title">Email Agent</div><div class="how-desc">Reads your inbox, qualifies leads, drafts replies, and flags what needs you.</div></div>
+      <div class="how-card"><span class="how-icon">📤</span><div class="how-title">Outreach Agent</div><div class="how-desc">Sends personalized cold emails to your exact target market daily.</div></div>
+      <div class="how-card"><span class="how-icon">📅</span><div class="how-title">Calendar Agent</div><div class="how-desc">Manages your schedule, books discovery calls, and sends reminders.</div></div>
+      <div class="how-card"><span class="how-icon">📱</span><div class="how-title">Social Agent</div><div class="how-desc">Posts daily content to LinkedIn, Twitter, and Instagram on your behalf.</div></div>
+      <div class="how-card"><span class="how-icon">☀️</span><div class="how-title">Briefing Agent</div><div class="how-desc">Sends you a 7am daily brief — pipeline, priorities, schedule, intel.</div></div>
+      <div class="how-card"><span class="how-icon">🔍</span><div class="how-title">Scanner Agent</div><div class="how-desc">Monitors your market, competitors, and opportunities in real time.</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface)">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title" style="margin-bottom:8px">Simple. Flat. No surprises.</h2>
+    <p class="section-sub" style="margin:0 auto 64px">One price. Full system. Cancel anytime.</p>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">Digital Agency97</div>
+        <div class="plan-period">/ month</div>
+        <ul class="plan-features">
+          <li>Email Agent</li>
+          <li>Outreach Agent</li>
+          <li>Daily Briefing</li>
+          <li>Up to 500 contacts/mo</li>
+          <li>Dominic sets it all up</li>
+        </ul>
+        <a href="/onboarding.html" class="plan-cta outline">Get Started</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">3 handles your outreach, client comms, and new business pipeline so your team ships great work instead of chasing people.97</div>
+        <div class="plan-period">/ month</div>
+        <ul class="plan-features">
+          <li>All 8 Agents</li>
+          <li>Email + Outreach + Calendar</li>
+          <li>Social Content Daily</li>
+          <li>Unlimited contacts</li>
+          <li>Weekly strategy call</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="/onboarding.html" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Done For You</div>
+        <div class="plan-price">🎨,500</div>
+        <div class="plan-period">/ month</div>
+        <ul class="plan-features">
+          <li>Full white-glove setup</li>
+          <li>Custom agent training</li>
+          <li>Dedicated Slack channel</li>
+          <li>Weekly reporting</li>
+          <li>Dominic runs point</li>
+        </ul>
+        <a href="/onboarding.html" class="plan-cta outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Ready to put your business<br><span class="grad-text">on autopilot?</span></h2>
+  <p>Takes 10 minutes to onboard. Your agents are live within 24 hours.</p>
+  <a href="/onboarding.html" class="btn-primary">Start with 3 →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">3</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/onboarding.html">Get Started</a>
+  </div>
+  <div class="footer-copy">© 2026 3 Consulting · AI Automation That Works For You</div>
+</footer>
+
+</body>
+</html>
