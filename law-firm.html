@@ -96,6 +96,9 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
 .footer-copy{font-size:12px;color:var(--muted);width:100%}
 
 @media(max-width:768px){nav{padding:16px 20px}.nav-links{display:none}footer{flex-direction:column}}
+
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:64px;align-items:start}
+.plan-cta-grad{background:var(--grad);color:#fff;box-shadow:0 0 30px rgba(233,30,140,.2)}
 </style>
 </head>
 <body>
@@ -110,18 +113,18 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
     <a href="/event-planner.html">Events</a>
     <a href="/staffing.html">Staffing</a>
   </div>
-  <a href="/onboarding.html" class="nav-cta">Get Started</a>
+  <a href="#pricing" class="nav-cta">Get Started</a>
 </nav>
 
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-role">Built for Attorney & Solo Law Firm Owner</div>
-    <div class="hero-badge"><span class="hero-badge-dot"></span> Live & Autonomous · 8 Agents Running</div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Live & Autonomous · 11 Agents Running</div>
     <h1>Sign more clients.<br><span class="grad-text">Run on autopilot.</span></h1>
     <p class="hero-sub">3 handles your intake follow-up, consult reminders, and pipeline so you stay in the courtroom and the boardroom — not the inbox.</p>
     <div class="hero-ctas">
-      <a href="/onboarding.html" class="btn-primary">Start with 3</a>
+      <a href="#pricing" class="btn-primary">Start with 3</a>
       <a href="/#pricing" class="btn-secondary">See Pricing</a>
     </div>
   </div>
@@ -156,61 +159,62 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
   </div>
 </section>
 
-<section style="background:var(--surface)">
+<section id="pricing" style="background:var(--surface)">
   <div class="section-inner" style="text-align:center">
     <div class="section-label">Pricing</div>
     <h2 class="section-title" style="margin-bottom:8px">Simple. Flat. No surprises.</h2>
     <p class="section-sub" style="margin:0 auto 64px">One price. Full system. Cancel anytime.</p>
-    <div class="pricing-grid">
-      <div class="plan">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price">$297</div>
-        <div class="plan-period">/ month</div>
+    <div class="pricing" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,400px));justify-content:center;gap:28px">
+
+      <!-- Operator -->
+      <div class="plan featured fade-up">
+        <div class="plan-badge">Founding Offer</div>
+        <div class="plan-tier">Core</div>
+        <div class="plan-name">Operator</div>
+        <div class="plan-price" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"><sup>$</sup>1,750<span style="-webkit-text-fill-color:var(--muted)">/mo</span></div>
+        <p class="plan-tagline">+ $1,500 one-time implementation. For consultants, agencies, and service businesses running BD solo.</p>
+        <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>Email Agent</li>
-          <li>Outreach Agent</li>
-          <li>Daily Briefing</li>
-          <li>Up to 500 contacts/mo</li>
-          <li>Dominic sets it all up</li>
+          <li>Autonomous outreach from your domain (25/day)</li>
+          <li>AI inbox management + replies</li>
+          <li>Calendar booking automation</li>
+          <li>Social content posted daily (Mon&ndash;Fri)</li>
+          <li>Daily 7am intelligence brief</li>
+          <li>Pipeline tracking + CRM</li>
+          <li>Opportunity scanner (every 6h)</li>
+          <li>All 11 agents included &mdash; activate what you need</li>
         </ul>
-        <a href="/onboarding.html" class="plan-cta outline">Get Started</a>
+        <a href="https://buy.stripe.com/7sYfZh0zr8dg0xmfHIbo403" class="plan-cta plan-cta-grad">Get Started</a>
+        <p style="margin-top:14px;font-size:.8rem;color:var(--muted);text-align:center">Implementation waived for our first 3 clients &mdash; code <strong>FOUNDING3</strong> at checkout.</p>
       </div>
-      <div class="plan featured">
-        <div class="plan-badge">Most Popular</div>
-        <div class="plan-name">Growth</div>
-        <div class="plan-price">$997</div>
-        <div class="plan-period">/ month</div>
+
+      <!-- Executive -->
+      <div class="plan fade-up">
+        <div class="plan-tier">Enterprise</div>
+        <div class="plan-name">Executive</div>
+        <div class="plan-price">Custom</div>
+        <p class="plan-tagline">For CEOs and growing teams who need a full AI chief of operations layer.</p>
+        <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>All 8 Agents</li>
-          <li>Email + Outreach + Calendar</li>
-          <li>Social Content Daily</li>
-          <li>Unlimited contacts</li>
-          <li>Weekly strategy call</li>
+          <li>Everything in Operator</li>
+          <li>Custom agent configuration</li>
+          <li>Multi-channel outreach sequences</li>
+          <li>Team-wide deployment</li>
+          <li>Custom integrations + workflows</li>
+          <li>Dedicated implementation + onboarding</li>
           <li>Priority support</li>
         </ul>
-        <a href="/onboarding.html" class="plan-cta">Get Started</a>
+        <a href="mailto:dominic@3consulting.us" class="plan-cta plan-cta-outline">Contact Us</a>
       </div>
-      <div class="plan">
-        <div class="plan-name">Done For You</div>
-        <div class="plan-price">$3,500</div>
-        <div class="plan-period">/ month</div>
-        <ul class="plan-features">
-          <li>Full white-glove setup</li>
-          <li>Custom agent training</li>
-          <li>Dedicated Slack channel</li>
-          <li>Weekly reporting</li>
-          <li>Dominic runs point</li>
-        </ul>
-        <a href="/onboarding.html" class="plan-cta outline">Get Started</a>
-      </div>
+
     </div>
   </div>
 </section>
 
 <div class="cta-strip">
   <h2>Ready to put your business<br><span class="grad-text">on autopilot?</span></h2>
-  <p>Takes 10 minutes to onboard. Your agents are live within 24 hours.</p>
-  <a href="/onboarding.html" class="btn-primary">Start with 3 →</a>
+  <p>Takes 10 minutes to onboard. Your agents are live within 48 hours.</p>
+  <a href="#pricing" class="btn-primary">Start with 3 →</a>
 </div>
 
 <footer>
@@ -218,7 +222,8 @@ footer{padding:40px 48px;display:flex;align-items:center;justify-content:space-b
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/#pricing">Pricing</a>
-    <a href="/onboarding.html">Get Started</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
   </div>
   <div class="footer-copy">© 2026 3 Consulting · AI Automation That Works For You</div>
 </footer>
