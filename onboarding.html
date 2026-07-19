@@ -689,14 +689,7 @@ Submitted: ${new Date().toLocaleString()}
 View in Supabase: https://supabase.com/dashboard/project/wauirprbbsmfjcaevwma/editor
     `.trim();
 
-    await fetch('/api/onboard', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        subject: `New Client: ${data.name} — ${data.business}`,
-        text: emailBody
-      })
-    });
+    // Notification emails are sent server-side by the agent watching client_onboarding
 
     // 3. Show success
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
